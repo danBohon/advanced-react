@@ -20,6 +20,7 @@ import CarListRender from "./components/RenderProps/CarsListRender";
 import Parent from "./components/Children/Parent";
 
 import "./App.css";
+import CarsListRender from "./components/RenderProps/CarsListRender";
 
 class App extends Component {
 	render() {
@@ -29,12 +30,27 @@ class App extends Component {
 				<div className="content">
 					<Switch>
 						{/* Presentational */}
-
+						<Route path='/starwars_presentational/' component={StarWarsContainer}/>
 						{/* HOC */}
-
+						<Route path='/starwars' component={StarWars}/>
 						{/* Render Props */}
+						<Route 
+							path='/cars_list_renderprops' 
+							render={() => {
+								return <div>
+									<DataFetcher
+									url="/api/cars_List/1"
+									render={(data) => {
+										return <CarListRender data={data} />
+									}} />
+								</div>
+							}} 
+						/>
 
-						{/* Children */}
+						
+						<Route path="/starwars_renderprops" component={StarWarsRender} />
+
+						<Route path="/children_example" component={Parent} />
 					</Switch>
 				</div>
 			</div>
